@@ -1,4 +1,9 @@
 node_modules
 .env
 .env.*
-npm-debug.log
+*.log
+public
+.git
+.gitignore
+Dockerfile
+.dockerignore
