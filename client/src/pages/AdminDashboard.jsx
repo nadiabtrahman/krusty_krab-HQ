@@ -8,6 +8,7 @@ const AdminDashboard = () => {
     const role = sessionStorage.getItem('role');
     const token = sessionStorage.getItem('token');
     const [profile, setProfile] = useState(null);
+    const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
         api.get('/crew/me').then(res => setProfile(res.data)).catch(() => {});
@@ -17,7 +18,7 @@ const AdminDashboard = () => {
         try {
             await api.post('/attendance/clock-in');
             alert("Clocked in! Time is money!");
-            window.location.reload();
+            setRefreshKey(k => k + 1);
         } catch (err) {
             alert(err.response?.data?.message || "Error clocking in");
         }
@@ -27,7 +28,7 @@ const AdminDashboard = () => {
         try {
             await api.post('/attendance/clock-out');
             alert("Clocked out successfully!");
-            window.location.reload();
+            setRefreshKey(k => k + 1);
         } catch (err) {
             alert(err.response?.data?.message || "Error clocking out");
         }
@@ -53,7 +54,7 @@ const AdminDashboard = () => {
 
             <section>
                 <h2>Krusty Krab Crew</h2>
-                <StaffStatus />
+                <StaffStatus key={refreshKey} />
             </section><br /><br />
 
             <section>

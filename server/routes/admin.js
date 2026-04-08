@@ -42,27 +42,35 @@ router.post('/hire', auth, async (req, res) => {
     const { name, email, role, birthday, application_id } = req.body;
     const defaultPassword = 'KrabbyPatty123';
 
+    const client = await pool.connect();
     try {
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(defaultPassword, salt);
 
-        const staffRes = await pool.query(
+        await client.query('BEGIN');
+
+        const staffRes = await client.query(
             "INSERT INTO staff (name, role, email, birth_date) VALUES ($1, $2, $3, $4) RETURNING id",
             [name, role, email, birthday]
         );
         const newStaffId = staffRes.rows[0].id;
 
-        await pool.query(
+        await client.query(
             "INSERT INTO users (username, password_hash, staff_id) VALUES ($1, $2, $3)",
             [name.toLowerCase().replace(/\s/g, ''), hashedPassword, newStaffId]
         );
 
-        await pool.query("DELETE FROM applications WHERE id = $1", [application_id]);
+        await client.query("DELETE FROM applications WHERE id = $1", [application_id]);
+
+        await client.query('COMMIT');
 
         res.json({ message: "Success! User created." });
     } catch (err) {
+        await client.query('ROLLBACK');
         console.error(err.message);
         res.status(500).send("Server Error");
+    } finally {
+        client.release();
     }
 });
 
@@ -81,17 +89,20 @@ router.get('/staff-status', auth, async (req, res) => {
                 staff.birth_date,
                 staff.email,
                 latest_att.status as attendance_status,
-                latest_att.clock_in_time,
-                latest_att.clock_out_time,
+                latest_att.clock_in_time AT TIME ZONE 'UTC' as clock_in_time,
+                latest_att.clock_out_time AT TIME ZONE 'UTC' as clock_out_time,
                 CASE
                     WHEN latest_att.status = 'active' THEN 'Clocked In'
                     ELSE 'Not Working'
                 END as current_status
             FROM staff
             LEFT JOIN LATERAL (
-                SELECT * FROM attendance 
-                WHERE attendance.staff_id = staff.id 
-                ORDER BY clock_in_time DESC
+                SELECT * FROM attendance
+                WHERE attendance.staff_id = staff.id
+                    AND (status = 'active' OR clock_out_time IS NOT NULL)
+                ORDER BY
+                    CASE WHEN status = 'active' THEN 0 ELSE 1 END ASC,
+                    id DESC
                 LIMIT 1
             ) AS latest_att ON true
             ORDER BY staff.name ASC

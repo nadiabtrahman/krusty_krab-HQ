@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import api from '../api/axios';
 
 const EMPTY_FORM = { name: '', role: '', hourly_rate: '', image: '', bio: '', birth_date: '', email: '' };
@@ -71,8 +71,8 @@ const StaffStatus = () => {
                 </thead>
                 <tbody>
                     {staff.map(member => (
-                        <>
-                            <tr key={member.id}>
+                        <Fragment key={member.id}>
+                            <tr>
                                 <td>{member.name}</td>
                                 <td>{member.role}</td>
                                 <td>
@@ -136,7 +136,7 @@ const StaffStatus = () => {
                                     </td>
                                 </tr>
                             )}
-                        </>
+                        </Fragment>
                     ))}
                 </tbody>
             </table>

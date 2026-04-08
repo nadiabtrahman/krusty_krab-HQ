@@ -8,6 +8,7 @@ import EditProfile from '../components/EditProfile';
 const CrewPortal = () => {
     const token = sessionStorage.getItem('token');
     const [profile, setProfile] = useState(null);
+    const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
         api.get('/crew/me')
@@ -19,7 +20,7 @@ const CrewPortal = () => {
         try {
             await api.post('/attendance/clock-in');
             alert("Clocked in! Time is money!");
-            window.location.reload();
+            setRefreshKey(k => k + 1);
         } catch (err) {
             alert(err.response?.data?.message || "Error clocking in");
         }
@@ -29,7 +30,7 @@ const CrewPortal = () => {
         try {
             await api.post('/attendance/clock-out');
             alert("Clocked out successfully!");
-            window.location.reload();
+            setRefreshKey(k => k + 1);
         } catch (err) {
             alert(err.response?.data?.message || "Error clocking out");
         }
@@ -54,7 +55,7 @@ const CrewPortal = () => {
             <div className="crew-portal-grid">
                 <section className="crew-section">
                     <h2>My Attendance</h2>
-                    <MyAttendance />
+                    <MyAttendance key={refreshKey} />
                 </section>
 
                 <section className="crew-section">
