@@ -42,7 +42,7 @@ router.post('/clock-out', auth, async (req, res) => {
     try {
         const { staff_id } = req.user;
         const result = await pool.query(
-            "UPDATE attendance SET status ='clocked_out' WHERE staff_id = $1 AND status = 'active' RETURNING*",
+            "UPDATE attendance SET status = 'clocked_out', clock_out_time = CURRENT_TIMESTAMP WHERE staff_id = $1 AND status = 'active' RETURNING *",
             [staff_id]
         );
 

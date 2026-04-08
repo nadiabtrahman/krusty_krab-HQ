@@ -21,6 +21,7 @@ const MyAttendance = () => {
                     <tr>
                         <th>Date</th>
                         <th>Clock-In Time</th>
+                        <th>Clock-Out Time</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@ const MyAttendance = () => {
                         <tr key={rec.id}>
                             <td>{new Date(rec.clock_in_time).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</td>
                             <td>{new Date(rec.clock_in_time).toLocaleTimeString()}</td>
+                            <td>{rec.clock_out_time ? new Date(rec.clock_out_time).toLocaleTimeString() : '--:--'}</td>
                             <td>
                                 <span className={rec.status === 'active' ? 'status-clocked-in' : 'status-not-working'}>
                                     {rec.status === 'active' ? 'Clocked In' : 'Clocked Out'}

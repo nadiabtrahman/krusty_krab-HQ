@@ -80,13 +80,20 @@ router.get('/staff-status', auth, async (req, res) => {
                 staff.bio,
                 staff.birth_date,
                 staff.email,
+                latest_att.status as attendance_status,
+                latest_att.clock_in_time,
+                latest_att.clock_out_time,
                 CASE
-                    WHEN attendance.status = 'active' THEN 'Clocked In'
+                    WHEN latest_att.status = 'active' THEN 'Clocked In'
                     ELSE 'Not Working'
-                END as current_status,
-                attendance.clock_in_time
+                END as current_status
             FROM staff
-            LEFT JOIN attendance ON staff.id = attendance.staff_id AND attendance.status = 'active'
+            LEFT JOIN LATERAL (
+                SELECT * FROM attendance 
+                WHERE attendance.staff_id = staff.id 
+                ORDER BY clock_in_time DESC
+                LIMIT 1
+            ) AS latest_att ON true
             ORDER BY staff.name ASC
         `);
         res.json(statusReport.rows);

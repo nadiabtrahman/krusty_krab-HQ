@@ -65,6 +65,7 @@ const StaffStatus = () => {
                         <th>Position</th>
                         <th>Status</th>
                         <th>Clock-In Time</th>
+                        <th>Clock-Out Time</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -83,6 +84,10 @@ const StaffStatus = () => {
                                     {member.clock_in_time
                                         ? new Date(member.clock_in_time).toLocaleTimeString()
                                         : '--:--'}
+                                </td>
+                                <td>
+                                    {member.attendance_status === 'active' || !member.clock_out_time ? '--:--'
+                                        : new Date(member.clock_out_time).toLocaleTimeString()}
                                 </td>
                                 <td>
                                     {editingId === member.id ? (
