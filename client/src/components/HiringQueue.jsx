@@ -35,14 +35,12 @@ const HiringQueue = () => {
         }
     };
 
-    // Step 1: clicking Hire opens the modal and pre-fills the username
     const handleHireClick = (app) => {
         setHiringApp(app);
         setUsername(app.name.toLowerCase().replace(/\s/g, ''));
-        setPassword('');
+        setPassword('KrabbyPatty123');
     };
 
-    // Step 2: submitting the modal form sends everything to the API
     const handleHireSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -100,8 +98,10 @@ const HiringQueue = () => {
             {hiringApp && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h2>Hire {hiringApp.name}</h2>
-                        <p>Set their login credentials:</p>
+                        <h2>Hiring Confirmation</h2>
+                        <hr />
+                        <h3>Applicant: {hiringApp.name}</h3>
+                        <p>Please set their login credentials:</p>
                         <form onSubmit={handleHireSubmit}>
                             <label>Username</label>
                             <input
@@ -112,7 +112,7 @@ const HiringQueue = () => {
                             />
                             <label>Initial Password</label>
                             <input
-                                type="password"
+                                type="text"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 required
