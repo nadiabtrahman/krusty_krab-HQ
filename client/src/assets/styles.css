@@ -1286,3 +1286,50 @@ hr {
     background: linear-gradient(to right, transparent, var(--krusty-gold), transparent);
     margin: 16px 0;
 }
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal h2 {
+    margin: 0;
+    color: var(--krusty-blue);
+}
+
+.modal label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--krusty-blue);
+}
+
+.modal input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}

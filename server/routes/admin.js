@@ -39,13 +39,12 @@ router.post('/hire', auth, async (req, res) => {
         return res.status(403).json({ message: "Access Denied: Managers only" });
     }
 
-    const { name, email, role, birthday, application_id } = req.body;
-    const defaultPassword = 'KrabbyPatty123';
+    const { name, email, role, birthday, application_id, username, password } = req.body;
 
     const client = await pool.connect();
     try {
         const salt = await bcryptjs.genSalt(10);
-        const hashedPassword = await bcryptjs.hash(defaultPassword, salt);
+        const hashedPassword = await bcryptjs.hash(password, salt);
 
         await client.query('BEGIN');
 
@@ -57,7 +56,7 @@ router.post('/hire', auth, async (req, res) => {
 
         await client.query(
             "INSERT INTO users (username, password_hash, staff_id) VALUES ($1, $2, $3)",
-            [name.toLowerCase().replace(/\s/g, ''), hashedPassword, newStaffId]
+            [username, hashedPassword, newStaffId]
         );
 
         await client.query("DELETE FROM applications WHERE id = $1", [application_id]);

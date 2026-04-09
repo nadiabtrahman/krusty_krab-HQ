@@ -4,6 +4,9 @@ import api from "../api/axios";
 const HiringQueue = () => {
     const [apps, setApps] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [hiringApp, setHiringApp] = useState(null);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     useEffect(() => {
         fetchApps();
@@ -32,19 +35,28 @@ const HiringQueue = () => {
         }
     };
 
-    const handleHire = async (app) => {
-        const confirmHire = window.confirm(`Hire ${app.name} as a new staff member?`)
-        if(!confirmHire) return;
+    // Step 1: clicking Hire opens the modal and pre-fills the username
+    const handleHireClick = (app) => {
+        setHiringApp(app);
+        setUsername(app.name.toLowerCase().replace(/\s/g, ''));
+        setPassword('');
+    };
 
+    // Step 2: submitting the modal form sends everything to the API
+    const handleHireSubmit = async (e) => {
+        e.preventDefault();
         try {
             await api.post('/admin/hire', {
-                name: app.name,
-                email: app.email,
+                name: hiringApp.name,
+                email: hiringApp.email,
                 role: 'crew',
-                birthday: app.birth_date,
-                application_id: app.id
+                birthday: hiringApp.birth_date,
+                application_id: hiringApp.id,
+                username,
+                password,
             });
-            alert(`${app.name} is now a member of Krusty Krab!`);
+            alert(`${hiringApp.name} is now a member of Krusty Krab!`);
+            setHiringApp(null);
             fetchApps();
         } catch (err) {
             alert("Error hiring applicant.");
@@ -76,14 +88,43 @@ const HiringQueue = () => {
                             </td>
                             <td>
                                 <div className="action-btns">
-                                    <button className="btn-hire" onClick={() => handleHire(app)} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Hire</button>
+                                    <button className="btn-hire" onClick={() => handleHireClick(app)} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Hire</button>
                                     <button className="btn-reject" onClick={() => handleReject(app)} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Reject</button>
                                 </div>
                             </td>
-                       </tr>
+                        </tr>
                     ))}
                 </tbody>
             </table>
+
+            {hiringApp && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Hire {hiringApp.name}</h2>
+                        <p>Set their login credentials:</p>
+                        <form onSubmit={handleHireSubmit}>
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                                required
+                            />
+                            <label>Initial Password</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                required
+                            />
+                            <div className="modal-actions">
+                                <button className="btn-hire" type="submit">Confirm Hire</button>
+                                <button className="btn-reject" type="button" onClick={() => setHiringApp(null)}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
