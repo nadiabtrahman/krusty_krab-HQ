@@ -16,7 +16,7 @@ const Menu = () => {
 
     useEffect(() => {
         api.get('/menu')
-            .then(res => { setItems(res.data); setLoading(false); })
+            .then(res => { setItems(Array.isArray(res.data) ? res.data : []); setLoading(false); })
             .catch(err => { setError(err.message); setLoading(false); });
     }, []);
 

@@ -12,7 +12,7 @@ const HiringQueue = () => {
     const fetchApps = async () => {
         try {
             const res = await api.get('/admin/applications')
-            setApps(res.data);
+            setApps(Array.isArray(res.data) ? res.data : []);
             setLoading(false);
         } catch (err) {
             console.error("Fetch Error: ", err);

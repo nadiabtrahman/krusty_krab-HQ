@@ -8,7 +8,7 @@ const MyTodos = () => {
 
     useEffect(() => {
         api.get('/todos')
-            .then(res => { setTodos(res.data); setLoading(false); })
+            .then(res => { setTodos(Array.isArray(res.data) ? res.data : []); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);
 

@@ -7,7 +7,7 @@ const MyAttendance = () => {
 
     useEffect(() => {
         api.get('/attendance/my')
-            .then(res => { setRecords(res.data); setLoading(false); })
+            .then(res => { setRecords(Array.isArray(res.data) ? res.data : []); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);
 

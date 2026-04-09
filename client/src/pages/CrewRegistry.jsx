@@ -13,7 +13,7 @@ const CrewRegistry = () => {
         const fetchCrew = async () => {
             try {
                 const res = await api.get('/crew');
-                setEmployees(res.data);
+                setEmployees(Array.isArray(res.data) ? res.data : []);
             } catch (err) {
                 setError(err.message);
             } finally {

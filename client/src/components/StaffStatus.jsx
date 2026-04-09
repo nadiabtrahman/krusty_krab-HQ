@@ -12,7 +12,7 @@ const StaffStatus = () => {
     const fetchStatus = async () => {
         try {
             const res = await api.get('/admin/staff-status');
-            setStaff(res.data);
+            setStaff(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
             console.error("Error fetching staff status");
         } finally {
