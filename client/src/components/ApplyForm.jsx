@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import api from '../api/axios';
 
 const ApplyForm = ({ onEmployeeAdded }) => {
     const [name, setName] = useState('');
@@ -12,19 +13,8 @@ const ApplyForm = ({ onEmployeeAdded }) => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch("http://localhost:5000/apply", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, birth_date, email }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to submit application.');
-            }
-
-            const result = await response.json();
-            onEmployeeAdded(result.data);
+            const result = await api.post('/apply', { name, birth_date, email });
+            onEmployeeAdded(result.data.data);
             setName('');
             setBirthDate('');
             setEmail('');
