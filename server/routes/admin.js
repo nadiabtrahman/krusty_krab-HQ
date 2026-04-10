@@ -132,4 +132,30 @@ router.put('/staff/:id', auth, async (req, res) => {
     }
 });
 
+router.delete('/staff/:id', auth, async (req, res) => {
+    if (req.user.role !== 'Manager') return res.status(403).json({ message: "Managers only" });
+
+    const { id } = req.params;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query("DELETE FROM attendance WHERE staff_id = $1", [id]);
+        await client.query("DELETE FROM todos WHERE staff_id = $1", [id]);
+        await client.query("DELETE FROM users WHERE staff_id = $1", [id]);
+        const result = await client.query("DELETE FROM staff WHERE id = $1 RETURNING *", [id]);
+        if (result.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ message: "Staff not found" });
+        }
+        await client.query('COMMIT');
+        res.json({ message: "Staff deleted." });
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    } finally {
+        client.release();
+    }
+});
+
 module.exports = router;

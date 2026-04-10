@@ -8,6 +8,7 @@ const StaffStatus = () => {
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState(EMPTY_FORM);
+    const [deletingMember, setDeletingMember] = useState(null);
 
     const fetchStatus = async () => {
         try {
@@ -43,7 +44,6 @@ const StaffStatus = () => {
         setEditForm({ ...editForm, [e.target.name]: e.target.value });
     };
 
-
     const handleSave = async (id) => {
         try {
             const res = await api.put(`/admin/staff/${id}`, editForm);
@@ -51,6 +51,16 @@ const StaffStatus = () => {
             setEditingId(null);
         } catch (err) {
             alert(err.response?.data?.message || 'Error updating staff');
+        }
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            await api.delete(`/admin/staff/${deletingMember.id}`);
+            setStaff(staff.filter(m => m.id !== deletingMember.id));
+            setDeletingMember(null);
+        } catch (err) {
+            alert(err.response?.data?.message || 'Error deleting staff');
         }
     };
 
@@ -93,7 +103,10 @@ const StaffStatus = () => {
                                     {editingId === member.id ? (
                                         <button className="btn-reject" onClick={() => setEditingId(null)}>Cancel</button>
                                     ) : (
-                                        <button className="btn-menu-edit" onClick={() => handleEditClick(member)}>Edit</button>
+                                        <div className="action-btns">
+                                            <button className="btn-menu-edit" onClick={() => handleEditClick(member)}>Edit</button>
+                                            <button className="btn-reject" onClick={() => setDeletingMember(member)}>Delete</button>
+                                        </div>
                                     )}
                                 </td>
                             </tr>
@@ -140,6 +153,19 @@ const StaffStatus = () => {
                     ))}
                 </tbody>
             </table>
+
+            {deletingMember && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Fire {deletingMember.name}?</h2>
+                        <p>This will permanently remove them and all their records.</p>
+                        <div className="modal-actions">
+                            <button className="btn-reject" onClick={handleDeleteConfirm}>Yes, Fire Them</button>
+                            <button className="btn-hire" onClick={() => setDeletingMember(null)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
