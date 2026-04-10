@@ -40,7 +40,7 @@ const Menu = () => {
         }
     };
 
-    if (loading) return <p>Loading the menu...🍔</p>;
+    if (loading) return <p className='loading-message'>Loading the menu...🍔</p>;
     if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
 
     const filtered = items.filter(item => item.category === activeTab);

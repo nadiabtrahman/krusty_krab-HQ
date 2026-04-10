@@ -27,6 +27,21 @@ h1, h2, h3 {
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.12);
 }
 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
 /* ── Shared Animation ─────────────────── */
 @keyframes wobble {
     0%, 100% { transform: rotate(-1deg); }

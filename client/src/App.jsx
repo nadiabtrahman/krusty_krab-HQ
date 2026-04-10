@@ -14,20 +14,22 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <Navbar />
-            <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/crew" element={<CrewRegistry />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                    <Route path="/crew-portal" element={<CrewPortal />} />
-                    <Route path="/crew/:id" element={<EmployeeDetails />} />
-                    <Route path="/apply" element={<Apply />} />
-                    <Route path="/menu" element={<Menu />} />
-                </Routes>
-            </main>
-            <Footer />
+            <div className='app-container'>
+                <Navbar />
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/crew" element={<CrewRegistry />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                        <Route path="/crew-portal" element={<CrewPortal />} />
+                        <Route path="/crew/:id" element={<EmployeeDetails />} />
+                        <Route path="/apply" element={<Apply />} />
+                        <Route path="/menu" element={<Menu />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
         </Router>
     );
 }

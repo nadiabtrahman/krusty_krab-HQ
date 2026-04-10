@@ -25,7 +25,7 @@ const CrewRegistry = () => {
         fetchCrew();
     }, []);
 
-    if (loading) return <p>Loading the Krew...🍔</p>;
+    if (loading) return <p className='loading-message'>Loading the Krew...🍔</p>;
     if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
 
     return (

@@ -25,7 +25,7 @@ const EmployeeDetails = () => {
         fetchDetail();
     }, [id]);
 
-    if (loading) return <p>Searching the galley...</p>;
+    if (loading) return <p className='loading-message'>Searching the galley...</p>;
     if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
     if (!employee) return <p>Employee not found! Check Chum Bucket.</p>;
 
