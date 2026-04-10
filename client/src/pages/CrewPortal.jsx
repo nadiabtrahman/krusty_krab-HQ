@@ -77,7 +77,7 @@ const CrewPortal = () => {
 
                 <section className="crew-section">
                     <h2>Edit My Details</h2>
-                    <EditProfile />
+                    <EditProfile onSave={(updated) => setProfile(prev => ({ ...prev, ...updated }))} />
                 </section>
             </div>
         </div>

@@ -43,11 +43,11 @@ router.get('/:id', async (req, res) => {
 router.patch('/me', auth, async (req, res) => {
     try {
         const staffId = req.user.staff_id || req.user.id;
-        const { email, birth_date } = req.body;
+        const { email, birth_date, image } = req.body;
 
         const updatedProfile = await pool.query(
-            "UPDATE staff SET email = $1, birth_date = $2 WHERE id = $3 RETURNING *",
-            [email, birth_date, staffId]
+            "UPDATE staff SET email = $1, birth_date = $2, image = $3 WHERE id = $4 RETURNING *",
+            [email, birth_date, image, staffId]
         );
 
         if (updatedProfile.rows.length === 0) {

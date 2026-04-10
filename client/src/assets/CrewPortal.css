@@ -216,6 +216,35 @@
     margin: 12px 0;
 }
 
+/* ── Edit Profile Photo ───────────────── */
+.edit-profile-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.photo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--krusty-blue);
+    background: #e8ddb5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    color: var(--krusty-blue);
+    font-size: 0.8rem;
+}
+
+.edit-profile-photo .photo-preview {
+    width: 80px;
+    height: 80px;
+}
+
 /* ── Edit Profile Form ────────────────── */
 .edit-profile-form {
     display: flex;

@@ -26,7 +26,8 @@ const upload = multer({
 
 router.post('/staff-photo', auth, upload.single('photo'), (req, res) => {
     if (!req.file) return res.status(400).json({ message: "No file uploaded" });
-    res.json({ url: `/public/staff/${req.file.filename}` });
+    const base = process.env.SERVER_URL || `${req.protocol}://${req.get('host')}`;
+    res.json({ url: `${base}/public/staff/${req.file.filename}` });
 });
 
 module.exports = router;
