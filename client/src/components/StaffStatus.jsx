@@ -56,7 +56,8 @@ const StaffStatus = () => {
 
     const handleDeleteConfirm = async () => {
         try {
-            await api.delete(`/admin/staff/${deletingMember.id}`);
+            const res = await api.delete(`/admin/staff/${deletingMember.id}`);
+            alert(res.data.message);
             setStaff(staff.filter(m => m.id !== deletingMember.id));
             setDeletingMember(null);
         } catch (err) {
