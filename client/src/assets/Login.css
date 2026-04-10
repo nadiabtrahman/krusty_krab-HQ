@@ -60,3 +60,10 @@
     text-align: center;
     margin-top: 8px;
 }
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 768px) {
+    .login-form {
+        padding: 20px;
+    }
+}

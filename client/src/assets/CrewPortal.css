@@ -55,6 +55,10 @@
 
 /* ── Responsive ───────────────────────── */
 @media (max-width: 768px) {
+    .crew-portal {
+        padding: 12px;
+    }
+
     .crew-portal-grid {
         grid-template-columns: 1fr;
     }
@@ -63,8 +67,24 @@
         grid-column: 1;
     }
 
+    .crew-section {
+        padding: 16px;
+    }
+
     .portal-avatar {
         width: 35%;
+    }
+
+    /* Attendance table — hide Clock-Out, keep Date / Clock-In / Status */
+    .attendance-table th:nth-child(3),
+    .attendance-table td:nth-child(3) {
+        display: none;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+        padding: 6px 10px;
+        font-size: 0.85rem;
     }
 }
 

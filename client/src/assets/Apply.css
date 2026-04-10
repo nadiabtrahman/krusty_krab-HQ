@@ -53,3 +53,10 @@
     margin: 20px 0;
     animation: wobble 3s ease-in-out infinite;
 }
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 768px) {
+    .apply-card {
+        padding: 20px;
+    }
+}

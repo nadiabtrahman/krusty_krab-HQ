@@ -346,7 +346,7 @@
     }
 
     .staff-edit-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .staff-edit-row td {
