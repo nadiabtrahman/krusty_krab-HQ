@@ -60,17 +60,20 @@
     vertical-align: middle;
 }
 
+.staff-monitor th:last-child,
+.staff-monitor td:last-child {
+    padding-left: 0;
+    padding-right: 0;
+    width: 1%;
+    white-space: nowrap;
+}
+
 .staff-monitor tr:last-child td {
     border-bottom: none;
 }
 
 .staff-monitor tr:hover td {
-    background: rgba(192, 57, 43, 0.06);
-}
-
-.staff-monitor th:last-child,
-.staff-monitor td:last-child {
-    padding-right: 0;
+    background: rgba(8, 5, 5, 0.06);
 }
 
 .staff-monitor .btn-menu-edit {
@@ -201,6 +204,13 @@
     vertical-align: middle;
 }
 
+.hiring-queue th:last-child,
+.hiring-queue td:last-child {
+    padding-right: 0;
+    width: 1%;
+    white-space: nowrap;
+}
+
 .hiring-queue tr:last-child td {
     border-bottom: none;
 }
@@ -314,7 +324,6 @@
         padding: 16px;
     }
 
-    /* Hide clock time columns — keep Employee, Position, Status, Action */
     .staff-monitor th:nth-child(4),
     .staff-monitor td:nth-child(4),
     .staff-monitor th:nth-child(5),
@@ -328,7 +337,6 @@
         font-size: 0.85rem;
     }
 
-    /* Hide email column — keep Name, Birthday, Status, Action */
     .hiring-queue th:nth-child(2),
     .hiring-queue td:nth-child(2) {
         display: none;
@@ -340,16 +348,37 @@
         font-size: 0.85rem;
     }
 
+    .hiring-queue th:last-child,
+    .hiring-queue td:last-child {
+        padding-right: 10px;
+    }
+
     .action-btns {
         min-width: unset;
         flex-wrap: wrap;
     }
 
-    .staff-edit-grid {
-        grid-template-columns: 1fr;
-    }
-
     .staff-edit-row td {
         padding: 12px 8px;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+
+    .staff-edit-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
+    .staff-edit-field input,
+    .staff-edit-field textarea {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-hire,
+    .btn-reject {
+        font-size: 0.8rem;
+        padding: 3px 10px;
+        letter-spacing: 1px;
     }
 }

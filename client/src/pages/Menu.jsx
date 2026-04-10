@@ -11,6 +11,7 @@ const Menu = () => {
     const [error, setError] = useState(null);
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState({});
+    const [editError, setEditError] = useState('');
 
     const role = sessionStorage.getItem('role');
     const isManager = role === 'Manager';
@@ -35,8 +36,9 @@ const Menu = () => {
             const res = await api.put(`/menu/${id}`, editForm);
             setItems(items.map(item => item.id === id ? res.data.item : item));
             setEditingId(null);
+            setEditError('');
         } catch (err) {
-            alert(err.response?.data?.message || "Error updating item");
+            setEditError(err.response?.data?.message || "Error updating item");
         }
     };
 
@@ -77,6 +79,7 @@ const Menu = () => {
                                 <select name="category" value={editForm.category} onChange={handleEditChange}>
                                     {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                                 </select>
+                                {editError && <p className="inline-error">{editError}</p>}
                                 <div className="menu-edit-actions">
                                     <button className="btn-hire" onClick={() => handleEditSave(item.id)}>Save</button>
                                     <button className="btn-reject" onClick={() => setEditingId(null)}>Cancel</button>

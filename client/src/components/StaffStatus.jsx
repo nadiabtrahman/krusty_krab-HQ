@@ -8,7 +8,9 @@ const StaffStatus = () => {
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState(EMPTY_FORM);
+    const [editError, setEditError] = useState('');
     const [deletingMember, setDeletingMember] = useState(null);
+    const [deleteMsg, setDeleteMsg] = useState({ text: '', isError: false });
 
     const fetchStatus = async () => {
         try {
@@ -29,6 +31,7 @@ const StaffStatus = () => {
 
     const handleEditClick = (member) => {
         setEditingId(member.id);
+        setEditError('');
         setEditForm({
             name: member.name || '',
             role: member.role || '',
@@ -49,20 +52,30 @@ const StaffStatus = () => {
             const res = await api.put(`/admin/staff/${id}`, editForm);
             setStaff(staff.map(m => m.id === id ? { ...m, ...res.data.data } : m));
             setEditingId(null);
+            setEditError('');
         } catch (err) {
-            alert(err.response?.data?.message || 'Error updating staff');
+            setEditError(err.response?.data?.message || 'Error updating staff');
         }
+    };
+
+    const handleDeleteClick = (member) => {
+        setDeletingMember(member);
+        setDeleteMsg({ text: '', isError: false });
     };
 
     const handleDeleteConfirm = async () => {
         try {
             const res = await api.delete(`/admin/staff/${deletingMember.id}`);
-            alert(res.data.message);
             setStaff(staff.filter(m => m.id !== deletingMember.id));
-            setDeletingMember(null);
+            setDeleteMsg({ text: res.data.message, isError: false });
         } catch (err) {
-            alert(err.response?.data?.message || 'Error deleting staff');
+            setDeleteMsg({ text: err.response?.data?.message || 'Error deleting staff', isError: true });
         }
+    };
+
+    const handleDeleteClose = () => {
+        setDeletingMember(null);
+        setDeleteMsg({ text: '', isError: false });
     };
 
     if (loading) return <p>Loading crew status...🦀</p>;
@@ -106,7 +119,7 @@ const StaffStatus = () => {
                                     ) : (
                                         <div className="action-btns">
                                             <button className="btn-menu-edit" onClick={() => handleEditClick(member)}>Edit</button>
-                                            <button className="btn-reject" onClick={() => setDeletingMember(member)}>Delete</button>
+                                            <button className="btn-reject" onClick={() => handleDeleteClick(member)}>Delete</button>
                                         </div>
                                     )}
                                 </td>
@@ -114,7 +127,7 @@ const StaffStatus = () => {
 
                             {editingId === member.id && (
                                 <tr key={`edit-${member.id}`} className="staff-edit-row">
-                                    <td colSpan={5}>
+                                    <td colSpan={6}>
                                         <div className="staff-edit-form">
                                             <div className="staff-edit-grid">
                                                 <div className="staff-edit-field">
@@ -142,6 +155,7 @@ const StaffStatus = () => {
                                                     <textarea name="bio" value={editForm.bio} onChange={handleChange} rows={3} />
                                                 </div>
                                             </div>
+                                            {editError && <p className="inline-error">{editError}</p>}
                                             <div className="staff-edit-actions">
                                                 <button className="btn-hire" onClick={() => handleSave(member.id)}>Save</button>
                                                 <button className="btn-reject" onClick={() => setEditingId(null)}>Cancel</button>
@@ -158,14 +172,29 @@ const StaffStatus = () => {
             {deletingMember && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h2>Delete Confirmation</h2>
-                        <hr />
-                        <h3>Employee Name: {deletingMember.name}</h3>
-                        <p>This will permanently remove them and all their records.</p>
-                        <div className="modal-actions">
-                            <button className="btn-reject" onClick={handleDeleteConfirm}>Yes, Remove Them</button>
-                            <button className="btn-hire" onClick={() => setDeletingMember(null)}>Cancel</button>
-                        </div>
+                        {deleteMsg.text ? (
+                            <>
+                                <h2>{deleteMsg.isError ? 'Error' : 'Done'}</h2>
+                                <hr />
+                                <p className={deleteMsg.isError ? 'inline-error' : 'inline-success'} style={{ margin: '1rem 0' }}>
+                                    {deleteMsg.text}
+                                </p>
+                                <div className="modal-actions">
+                                    <button className="btn-hire" onClick={handleDeleteClose}>Close</button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <h2>Delete Confirmation</h2>
+                                <hr />
+                                <h3>Employee Name: {deletingMember.name}</h3>
+                                <p>This will permanently remove them and all their records.</p>
+                                <div className="modal-actions">
+                                    <button className="btn-reject" onClick={handleDeleteConfirm}>Yes, Remove Them</button>
+                                    <button className="btn-hire" onClick={handleDeleteClose}>Cancel</button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             )}

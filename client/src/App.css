@@ -42,6 +42,29 @@ main {
     font-size: 1.2rem;
 }
 
+/* ── Inline Feedback ──────────────────── */
+.inline-success {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #155724;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.inline-error {
+    background: #fdecea;
+    border: 2px solid var(--krusty-red);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: var(--krusty-red);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+}
+
 /* ── Shared Animation ─────────────────── */
 @keyframes wobble {
     0%, 100% { transform: rotate(-1deg); }

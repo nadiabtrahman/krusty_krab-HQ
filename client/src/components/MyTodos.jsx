@@ -5,12 +5,18 @@ const MyTodos = () => {
     const [todos, setTodos] = useState([]);
     const [newTask, setNewTask] = useState('');
     const [loading, setLoading] = useState(true);
+    const [todoError, setTodoError] = useState('');
 
     useEffect(() => {
         api.get('/todos')
             .then(res => { setTodos(Array.isArray(res.data) ? res.data : []); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);
+
+    const showError = (msg) => {
+        setTodoError(msg);
+        setTimeout(() => setTodoError(''), 3000);
+    };
 
     const handleAdd = async (e) => {
         e.preventDefault();
@@ -20,7 +26,7 @@ const MyTodos = () => {
             setTodos([res.data, ...todos]);
             setNewTask('');
         } catch (err) {
-            alert(err.response?.data?.message || 'Error adding todo');
+            showError(err.response?.data?.message || 'Error adding todo');
         }
     };
 
@@ -29,7 +35,7 @@ const MyTodos = () => {
             const res = await api.patch(`/todos/${id}/toggle`);
             setTodos(todos.map(t => t.id === id ? res.data : t));
         } catch (err) {
-            alert('Error updating todo');
+            showError('Error updating todo');
         }
     };
 
@@ -38,7 +44,7 @@ const MyTodos = () => {
             await api.delete(`/todos/${id}`);
             setTodos(todos.filter(t => t.id !== id));
         } catch (err) {
-            alert('Error deleting todo');
+            showError('Error deleting todo');
         }
     };
 
@@ -55,6 +61,7 @@ const MyTodos = () => {
                 />
                 <button type="submit" className="btn-hire">Add</button>
             </form>
+            {todoError && <p className="inline-error">{todoError}</p>}
 
             {todos.length === 0 ? (
                 <p className="todos-empty">No tasks yet. Add one above!</p>

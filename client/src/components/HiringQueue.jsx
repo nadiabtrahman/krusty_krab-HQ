@@ -7,6 +7,10 @@ const HiringQueue = () => {
     const [hiringApp, setHiringApp] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [hireSuccess, setHireSuccess] = useState('');
+    const [hireError, setHireError] = useState('');
+    const [rejectingApp, setRejectingApp] = useState(null);
+    const [rejectError, setRejectError] = useState('');
 
     useEffect(() => {
         fetchApps();
@@ -23,20 +27,21 @@ const HiringQueue = () => {
         }
     };
 
-    const handleReject = async (app) => {
-        const confirmReject = window.confirm(`Reject ${app.name}'s application?`);
-        if (!confirmReject) return;
-
+    const handleRejectConfirm = async () => {
         try {
-            await api.patch(`/admin/applications/${app.id}/status`);
+            await api.patch(`/admin/applications/${rejectingApp.id}/status`);
+            setRejectingApp(null);
+            setRejectError('');
             fetchApps();
         } catch (err) {
-            alert("Error rejecting application.");
+            setRejectError("Error rejecting application.");
         }
     };
 
     const handleHireClick = (app) => {
         setHiringApp(app);
+        setHireSuccess('');
+        setHireError('');
         setUsername(app.name.toLowerCase().replace(/\s/g, ''));
         setPassword(import.meta.env.VITE_CREW_INITIAL_PW);
     };
@@ -53,12 +58,17 @@ const HiringQueue = () => {
                 username,
                 password,
             });
-            alert(`${hiringApp.name} is now a member of Krusty Krab!`);
-            setHiringApp(null);
+            setHireSuccess(`${hiringApp.name} is now a member of the Krusty Krab!`);
             fetchApps();
         } catch (err) {
-            alert("Error hiring applicant.");
+            setHireError("Error hiring applicant.");
         }
+    };
+
+    const handleCloseModal = () => {
+        setHiringApp(null);
+        setHireSuccess('');
+        setHireError('');
     };
 
     if (loading) return <p>Loading applications...</p>
@@ -87,7 +97,7 @@ const HiringQueue = () => {
                             <td>
                                 <div className="action-btns">
                                     <button className="btn-hire" onClick={() => handleHireClick(app)} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Hire</button>
-                                    <button className="btn-reject" onClick={() => handleReject(app)} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Reject</button>
+                                    <button className="btn-reject" onClick={() => { setRejectingApp(app); setRejectError(''); }} style={{ visibility: app.status === 'pending' ? 'visible' : 'hidden' }}>Reject</button>
                                 </div>
                             </td>
                         </tr>
@@ -95,33 +105,63 @@ const HiringQueue = () => {
                 </tbody>
             </table>
 
+            {rejectingApp && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Reject Application</h2>
+                        <hr />
+                        <h3>{rejectingApp.name}</h3>
+                        <p>Are you sure you want to reject this application?</p>
+                        {rejectError && <p className="inline-error">{rejectError}</p>}
+                        <div className="modal-actions">
+                            <button className="btn-reject" onClick={handleRejectConfirm}>Yes, Reject</button>
+                            <button className="btn-hire" onClick={() => setRejectingApp(null)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {hiringApp && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h2>Hiring Confirmation</h2>
-                        <hr />
-                        <h3>Applicant: {hiringApp.name}</h3>
-                        <p>Please set their login credentials:</p>
-                        <form onSubmit={handleHireSubmit}>
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
-                                required
-                            />
-                            <label>Initial Password</label>
-                            <input
-                                type="text"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                required
-                            />
-                            <div className="modal-actions">
-                                <button className="btn-hire" type="submit">Confirm Hire</button>
-                                <button className="btn-reject" type="button" onClick={() => setHiringApp(null)}>Cancel</button>
-                            </div>
-                        </form>
+                        {hireSuccess ? (
+                            <>
+                                <h2>Employment Confirmed!</h2>
+                                <hr />
+                                <p className="inline-success" style={{ margin: '1rem 0' }}>{hireSuccess}</p>
+                                <div className="modal-actions">
+                                    <button className="btn-hire" onClick={handleCloseModal}>Done</button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <h2>Hiring Confirmation</h2>
+                                <hr />
+                                <h3>Applicant: {hiringApp.name}</h3>
+                                <p>Please set their login credentials:</p>
+                                <form onSubmit={handleHireSubmit}>
+                                    <label>Username</label>
+                                    <input
+                                        type="text"
+                                        value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                        required
+                                    />
+                                    <label>Initial Password</label>
+                                    <input
+                                        type="text"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    {hireError && <p className="inline-error">{hireError}</p>}
+                                    <div className="modal-actions">
+                                        <button className="btn-hire" type="submit">Confirm Hire</button>
+                                        <button className="btn-reject" type="button" onClick={handleCloseModal}>Cancel</button>
+                                    </div>
+                                </form>
+                            </>
+                        )}
                     </div>
                 </div>
             )}
