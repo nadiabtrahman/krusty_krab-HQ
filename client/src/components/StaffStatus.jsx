@@ -157,10 +157,12 @@ const StaffStatus = () => {
             {deletingMember && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h2>Fire {deletingMember.name}?</h2>
+                        <h2>Delete Confirmation</h2>
+                        <hr />
+                        <h3>Employee Name: {deletingMember.name}</h3>
                         <p>This will permanently remove them and all their records.</p>
                         <div className="modal-actions">
-                            <button className="btn-reject" onClick={handleDeleteConfirm}>Yes, Fire Them</button>
+                            <button className="btn-reject" onClick={handleDeleteConfirm}>Yes, Remove Them</button>
                             <button className="btn-hire" onClick={() => setDeletingMember(null)}>Cancel</button>
                         </div>
                     </div>
