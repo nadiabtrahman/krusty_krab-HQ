@@ -38,7 +38,7 @@ const HiringQueue = () => {
     const handleHireClick = (app) => {
         setHiringApp(app);
         setUsername(app.name.toLowerCase().replace(/\s/g, ''));
-        setPassword('KrabbyPatty123');
+        setPassword(import.meta.env.VITE_CREW_INITIAL_PW);
     };
 
     const handleHireSubmit = async (e) => {
