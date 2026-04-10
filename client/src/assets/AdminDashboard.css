@@ -50,6 +50,7 @@
     padding: 10px 16px;
     text-align: left;
     border-bottom: 3px solid #922b21;
+    padding-left: 0px;
 }
 
 .staff-monitor td {
@@ -65,6 +66,15 @@
 
 .staff-monitor tr:hover td {
     background: rgba(192, 57, 43, 0.06);
+}
+
+.staff-monitor th:last-child,
+.staff-monitor td:last-child {
+    padding-right: 0;
+}
+
+.staff-monitor .btn-menu-edit {
+    margin: 0;
 }
 
 .status-clocked-in {
@@ -292,4 +302,54 @@
     align-items: center;
     min-width: 180px;
     min-height: 34px;
+}
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 768px) {
+    .admin-dashboard {
+        padding: 12px;
+    }
+
+    .admin-dashboard section {
+        padding: 16px;
+    }
+
+    /* Hide clock time columns — keep Employee, Position, Status, Action */
+    .staff-monitor th:nth-child(4),
+    .staff-monitor td:nth-child(4),
+    .staff-monitor th:nth-child(5),
+    .staff-monitor td:nth-child(5) {
+        display: none;
+    }
+
+    .staff-monitor th,
+    .staff-monitor td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Hide email column — keep Name, Birthday, Status, Action */
+    .hiring-queue th:nth-child(2),
+    .hiring-queue td:nth-child(2) {
+        display: none;
+    }
+
+    .hiring-queue th,
+    .hiring-queue td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    .action-btns {
+        min-width: unset;
+        flex-wrap: wrap;
+    }
+
+    .staff-edit-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .staff-edit-row td {
+        padding: 12px 8px;
+    }
 }

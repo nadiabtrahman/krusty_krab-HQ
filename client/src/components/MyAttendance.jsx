@@ -33,7 +33,7 @@ const MyAttendance = () => {
                             <td>{rec.clock_out_time ? new Date(rec.clock_out_time).toLocaleTimeString() : '--:--'}</td>
                             <td>
                                 <span className={rec.status === 'active' ? 'status-clocked-in' : 'status-not-working'}>
-                                    {rec.status === 'active' ? 'Clocked In' : 'Clocked Out'}
+                                    {rec.status === 'active' ? 'IN' : 'OUT'}
                                 </span>
                             </td>
                         </tr>

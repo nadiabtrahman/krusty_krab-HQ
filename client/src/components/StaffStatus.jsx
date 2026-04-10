@@ -88,7 +88,7 @@ const StaffStatus = () => {
                                 <td>{member.role}</td>
                                 <td>
                                     <span className={member.current_status === 'Clocked In' ? 'status-clocked-in' : 'status-not-working'}>
-                                        {member.current_status}
+                                        {member.current_status === 'Clocked In' ? 'IN' : 'OUT'}
                                     </span>
                                 </td>
                                 <td>

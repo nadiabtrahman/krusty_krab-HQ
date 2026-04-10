@@ -31,6 +31,9 @@ services:
     build: ./client
     ports:
       - "3000:3000"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
     environment:
       VITE_API_URL: http://localhost:5000
       VITE_CREW_INITIAL_PW: KrabbyPatty123

@@ -53,6 +53,21 @@
     margin-bottom: 16px;
 }
 
+/* ── Responsive ───────────────────────── */
+@media (max-width: 768px) {
+    .crew-portal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crew-section:first-child {
+        grid-column: 1;
+    }
+
+    .portal-avatar {
+        width: 35%;
+    }
+}
+
 /* ── Attendance Table ─────────────────── */
 .attendance-table-wrap {
     overflow-x: auto;
