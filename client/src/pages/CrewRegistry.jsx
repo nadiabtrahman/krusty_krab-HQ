@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import EmployeeCard from '../components/EmployeeCard';
 import { Link } from 'react-router-dom';
 import api from '../api/axios';
+import '../assets/CrewRegistry.css';
 
 const CrewRegistry = () => {
     const isAuthenticated = !!sessionStorage.getItem('token');

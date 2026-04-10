@@ -1,0 +1,295 @@
+/* ── Admin Dashboard ─────────────────── */
+.admin-dashboard {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.admin-dashboard header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.admin-dashboard header p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+.admin-dashboard section {
+    background: linear-gradient(135deg, #fffbf0 0%, #fef3c7 100%);
+    border: 3px solid var(--krusty-blue);
+    border-radius: 16px;
+    box-shadow: 6px 6px 0px var(--krusty-blue);
+    padding: 28px;
+}
+
+.admin-dashboard section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* ── Staff Monitor Table ─────────────── */
+.staff-monitor {
+    overflow-x: auto;
+}
+
+.staff-monitor table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.staff-monitor th {
+    background: var(--krusty-red);
+    color: var(--white);
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 3px solid #922b21;
+}
+
+.staff-monitor td {
+    padding: 10px 16px;
+    border-bottom: 2px solid #e8ddb5;
+    color: var(--dark);
+    vertical-align: middle;
+}
+
+.staff-monitor tr:last-child td {
+    border-bottom: none;
+}
+
+.staff-monitor tr:hover td {
+    background: rgba(192, 57, 43, 0.06);
+}
+
+.status-clocked-in {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+    border-radius: 50px;
+    padding: 2px 12px;
+    display: inline-block;
+}
+
+.status-not-working {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background: #f2f2f2;
+    color: #888;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    padding: 2px 12px;
+    display: inline-block;
+}
+
+/* ── Staff Edit Form ─────────────────── */
+.staff-edit-row td {
+    background: #f0f6ff;
+    border-bottom: 3px solid var(--krusty-blue);
+    padding: 16px;
+}
+
+.staff-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.staff-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.staff-edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.staff-edit-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.staff-edit-field label {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1.5px;
+    color: var(--krusty-blue);
+    font-size: 0.9rem;
+}
+
+.staff-edit-field input,
+.staff-edit-field textarea {
+    padding: 7px 12px;
+    border: 2px solid var(--krusty-blue);
+    border-radius: 8px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+    background: var(--white);
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s ease;
+    resize: vertical;
+}
+
+.staff-edit-field input:focus,
+.staff-edit-field textarea:focus {
+    border-color: var(--krusty-red);
+}
+
+.staff-edit-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.photo-preview {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--krusty-blue);
+    box-shadow: 2px 2px 0px var(--krusty-blue);
+    margin-bottom: 6px;
+}
+
+/* ── Hiring Queue Table ───────────────── */
+.hiring-queue {
+    overflow-x: auto;
+}
+
+.hiring-queue table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.hiring-queue th {
+    background: var(--krusty-blue);
+    color: var(--krusty-gold);
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 3px solid var(--krusty-gold);
+}
+
+.hiring-queue td {
+    padding: 10px 16px;
+    border-bottom: 2px solid #e8ddb5;
+    color: var(--dark);
+    vertical-align: middle;
+}
+
+.hiring-queue tr:last-child td {
+    border-bottom: none;
+}
+
+.hiring-queue tr:hover td {
+    background: rgba(241, 196, 15, 0.12);
+}
+
+.hiring-queue .status-pending {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background: #fff3cd;
+    color: #856404;
+    border: 2px solid #ffc107;
+    border-radius: 50px;
+    padding: 2px 12px;
+    display: inline-block;
+}
+
+.hiring-queue .status-hired {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+    border-radius: 50px;
+    padding: 2px 12px;
+    display: inline-block;
+}
+
+.hiring-queue .status-rejected {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background: #fdecea;
+    color: var(--krusty-red);
+    border: 2px solid var(--krusty-red);
+    border-radius: 50px;
+    padding: 2px 12px;
+    display: inline-block;
+}
+
+.btn-hire {
+    font-family: 'Bangers', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    background: var(--krusty-red);
+    color: var(--white);
+    border: 2px solid #922b21;
+    border-radius: 50px;
+    padding: 4px 16px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #922b21;
+    transition: all 0.15s ease;
+}
+
+.btn-hire:hover {
+    background: #e74c3c;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px #922b21;
+}
+
+.btn-hire:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0px 0px 0px #922b21;
+}
+
+.btn-reject {
+    font-family: 'Bangers', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    background: var(--white);
+    color: var(--krusty-red);
+    border: 2px solid var(--krusty-red);
+    border-radius: 50px;
+    padding: 4px 16px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #922b21;
+    transition: all 0.15s ease;
+}
+
+.btn-reject:hover {
+    background: var(--krusty-red);
+    color: var(--white);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px #922b21;
+}
+
+.btn-reject:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0px 0px 0px #922b21;
+}
+
+.action-btns {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 180px;
+    min-height: 34px;
+}

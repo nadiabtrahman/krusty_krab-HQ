@@ -1,0 +1,62 @@
+/* ── Login Page ───────────────────────── */
+.login-wrapper {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-form {
+    background: linear-gradient(135deg, #fffbf0 0%, #fef3c7 100%);
+    padding: 32px;
+    border-radius: 16px;
+    border: 3px solid var(--krusty-blue);
+    box-shadow: 6px 6px 0px var(--krusty-blue);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.login-form label {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1.5px;
+    color: var(--krusty-blue);
+    font-size: 1rem;
+}
+
+.login-form input {
+    padding: 10px 16px;
+    border: 2px solid var(--krusty-blue);
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    background: var(--white);
+    color: var(--dark);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus {
+    border-color: var(--krusty-red);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
+.login-form input::placeholder {
+    color: #aaa;
+}
+
+.login-error {
+    background: #fdecea;
+    border: 2px solid var(--krusty-red);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: var(--krusty-red);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+}

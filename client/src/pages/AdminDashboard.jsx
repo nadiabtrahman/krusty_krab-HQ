@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import HiringQueue from '../components/HiringQueue';
 import StaffStatus from '../components/StaffStatus';
 import api from '../api/axios';
+import '../assets/AdminDashboard.css';
 
 const AdminDashboard = () => {
     const role = sessionStorage.getItem('role');

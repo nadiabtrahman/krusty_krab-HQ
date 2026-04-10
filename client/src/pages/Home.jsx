@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import '../assets/Home.css';
 
 const Home = () => {
     const isAuthenticated = !!sessionStorage.getItem('token');

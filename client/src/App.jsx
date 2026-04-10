@@ -9,7 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Apply from './pages/Apply';
 import Menu from './pages/Menu';
-import './assets/styles.css';
+import './App.css';
 
 function App() {
     return (

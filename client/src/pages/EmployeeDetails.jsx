@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api/axios';
+import '../assets/EmployeeDetails.css';
 
 const EmployeeDetails = () => {
     const { id } = useParams();

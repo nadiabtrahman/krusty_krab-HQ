@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import '../assets/Navbar.css';
 
 const Navbar = () => {
     const { pathname } = useLocation();
@@ -12,12 +13,12 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <img src="/logo.webp" alt="Krusty Krab" className="nav-logo" />
+            <Link to="/"><img src="/logo.webp" alt="Home" className="nav-logo" /></Link>
 
             <div className="nav-links">
                 {pathname !== '/' && (
                     <>
-                        {!isAuthenticated && <Link to="/">Home</Link>}
+                        {!isAuthenticated}
                         <Link to="/menu">Menu</Link>
                         <Link to="/crew">Krusty Krew</Link>
                     </>

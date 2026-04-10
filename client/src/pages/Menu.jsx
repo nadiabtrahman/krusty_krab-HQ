@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
+import '../assets/Menu.css';
 
 const CATEGORIES = ['Meal', 'Main', 'Side', 'Drink', 'Special'];
 

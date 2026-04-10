@@ -1,0 +1,62 @@
+/* ── Home ─────────────────────────────── */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-logo {
+    width: 240px;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.2));
+    margin-bottom: 20px;
+    animation: wobble 3s ease-in-out infinite;
+}
+
+/* ── CTA Section ──────────────────────── */
+.cta-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.home-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.home-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid var(--krusty-blue);
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0px var(--krusty-gold);
+}
+
+.home-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 0px var(--krusty-red);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.home-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+.home-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}

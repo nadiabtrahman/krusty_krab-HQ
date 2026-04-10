@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ApplyForm from "../components/ApplyForm";
 import { Link } from "react-router-dom";
+import '../assets/Apply.css';
 
 const Apply = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);

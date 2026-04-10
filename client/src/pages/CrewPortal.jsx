@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import api from '../api/axios';
 import MyAttendance from '../components/MyAttendance';
 import MyTodos from '../components/MyTodos';
+import '../assets/CrewPortal.css';
 import EditProfile from '../components/EditProfile';
 
 const CrewPortal = () => {

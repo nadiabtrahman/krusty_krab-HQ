@@ -1,0 +1,68 @@
+/* ── Employee Details ─────────────────── */
+.details-container {
+    max-width: 660px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.details-card {
+    background: linear-gradient(135deg, #fffbf0 0%, #fef3c7 100%);
+    padding: 32px;
+    border-radius: 16px;
+    border: 3px solid var(--krusty-blue);
+    box-shadow: 6px 6px 0px var(--krusty-blue);
+    margin-top: 20px;
+}
+
+.details-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+/* ID-badge photo (passport-like) */
+.id-photo {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 3px solid var(--krusty-blue);
+    box-shadow: 3px 3px 0px var(--krusty-blue);
+    flex-shrink: 0;
+}
+
+.id-photo-label {
+    font-size: 0.6rem;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
+    color: #aaa;
+    text-align: center;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.details-info {
+    flex: 1;
+}
+
+.details-info h1 {
+    font-size: 2rem;
+    margin: 0 0 4px 0;
+}
+
+.details-info h3 {
+    color: var(--ocean-blue);
+    margin: 0 0 12px 0;
+}
+
+.status-badge {
+    display: inline-block;
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+    border-radius: 50px;
+    padding: 3px 14px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}

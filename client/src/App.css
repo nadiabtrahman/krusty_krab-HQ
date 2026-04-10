@@ -1,0 +1,187 @@
+/* ── CSS Variables ────────────────────── */
+:root {
+    --krusty-red: #c0392b;
+    --krusty-blue: #1a3d6e;
+    --krusty-gold: #f1c40f;
+    --ocean-blue: #1e90ff;
+    --bg-sand: #fef9e7;
+    --white: #ffffff;
+    --dark: #1a252f;
+}
+
+/* ── Base ─────────────────────────────── */
+body {
+    margin: 0;
+    font-family: 'Fredoka One', 'Comic Neue', cursive, sans-serif;
+    background: linear-gradient(180deg, #c8e6f5 0%, #fef9e7 40%, #fef3c7 100%);
+    background-attachment: fixed;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Bangers', cursive;
+    color: var(--krusty-red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Shared Animation ─────────────────── */
+@keyframes wobble {
+    0%, 100% { transform: rotate(-1deg); }
+    50%       { transform: rotate(1deg); }
+}
+
+/* ── Shared Buttons ───────────────────── */
+.btn-primary,
+.submit-btn {
+    display: inline-block;
+    padding: 9px 22px;
+    margin: 0.8rem;
+    background-color: var(--krusty-red);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    box-shadow: 3px 3px 0px #922b21;
+    transition: all 0.15s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover,
+.submit-btn:hover {
+    background-color: #e74c3c;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #922b21;
+}
+
+.btn-primary:active,
+.submit-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #922b21;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--krusty-blue);
+    text-decoration: none;
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border: 2px solid var(--krusty-blue);
+    padding: 5px 16px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background: var(--krusty-blue);
+    color: var(--white);
+}
+
+/* ── Footer ───────────────────────────── */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--krusty-gold), transparent);
+    margin: 16px 0;
+}
+
+/* ── Modal ────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border: 2px solid var(--krusty-red);
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.modal h2 {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    line-height: 0px;
+    color: var(--krusty-red);
+}
+
+.modal hr {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background: var(--krusty-red);
+}
+
+.modal h3 {
+    margin: 0.3rem;
+    padding-bottom: 0.3rem;
+    text-align: center;
+    color: var(--ocean-blue);
+}
+
+.modal p {
+    margin: 0.2rem;
+    padding-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.modal form {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modal label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--krusty-blue);
+    margin-top: 6px;
+}
+
+.modal label:first-of-type {
+    margin-top: 0;
+}
+
+.modal input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+}

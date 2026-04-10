@@ -1,0 +1,55 @@
+/* ── Apply Page ───────────────────────── */
+.apply-container {
+    max-width: 580px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.apply-card {
+    background: linear-gradient(135deg, #fffbf0 0%, #fef3c7 100%);
+    padding: 32px;
+    border-radius: 16px;
+    border: 3px solid var(--krusty-blue);
+    box-shadow: 6px 6px 0px var(--krusty-blue);
+    margin-top: 20px;
+}
+
+.apply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.apply-form input {
+    padding: 10px 16px;
+    border: 2px solid var(--krusty-blue);
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    background: var(--white);
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.apply-form input:focus {
+    border-color: var(--krusty-red);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
+.apply-form input::placeholder {
+    color: #aaa;
+}
+
+/* ── Success View ─────────────────────── */
+.success-view {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin: 20px 0;
+    animation: wobble 3s ease-in-out infinite;
+}
